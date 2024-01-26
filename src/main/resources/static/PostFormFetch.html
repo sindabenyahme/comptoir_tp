@@ -91,8 +91,31 @@
                 })
                 .catch(afficheMessage);
         }
-        function supprimerCategori(id){
-        fetch
+        function supprimer(id){
+        // faire lappel fech avec une methode delete
+            fetch(`${id}`,
+                {
+                    method: 'delete',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    }
+                }
+            )
+            // selon le resultat
+                .then(response => {
+                    switch (response.status) {
+                        case 200:
+                            chargeCategories();
+                            break;
+                        case 404:
+                            afficheMessage("pas de categorie existant");
+                            break;
+                    }
+                })
+                .catch(afficheMessage);
+        }
+        }
         }
                                 }
     </script>
